@@ -1,0 +1,113 @@
+
+
+
+
+{
+    "name": "HDInsightLinkedService",
+    "properties": {
+        "clusterUri": "https://<xxx>.azurehdinsight.net",
+        "userName": "admin",
+        "password": "**********",
+        "storageAccountName": null,
+        "storageAccountKey": null,
+        "location": null,
+        "linkedServiceName": "StorageLinkedService",        
+        "type": "HDInsightBYOCLinkedService"
+    }
+}
+
+{
+    "name": "StorageLinkedService",
+    "properties": {
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=;AccountKey=",        
+        "type": "AzureStorageLinkedService"
+    }
+}
+
+
+{
+    "name": "InputFilesTable",
+    "properties": {
+        "published": false,
+        "location": {
+            "type": "AzureBlobLocation",
+            "folderPath": "filestoprocess/",
+            "linkedServiceName": "StorageLinkedService"
+        },
+        "availability": {
+            "frequency": "Hour",
+            "interval": 1,
+            "waitOnExternal": {
+                "retryInterval": "00:15:00",
+                "retryTimeout": "00:10:00",
+                "maximumRetry": 5
+            }
+        }
+    }
+}
+
+
+{
+    "name": "OutputFilesTable",
+    "properties": {
+        "published": false,
+        "location": {
+            "type": "AzureBlobLocation",
+            "folderPath": "processjsonfiles/",
+            "linkedServiceName": "StorageLinkedService"
+        },
+        "availability": {
+            "frequency": "Hour",
+            "interval": 1,
+            "waitOnExternal": null
+        }
+    }
+}
+{
+    "name": "TransformToJSONPipeline",
+    "properties": {
+        "description": "Transforms uploaded files to JSON",
+        "activities": [
+            {
+                "type": "DotNetActivity",
+                "transformation": {
+                    "assemblyName": "adf.filetransformation.dll",
+                    "entryPoint": "adf.filetransformation.XMLCSVToJSON",
+                    "packageLinkedService": "StorageLinkedService",
+                    "packageFile": "<container name>/<c# solution zip file>",
+                    "extendedProperties": {
+                        "SliceStart": "$$Text.Format('{0:yyyyMMddHH-mm}', Time.AddMinutes(SliceStart,0))"
+                    }
+                },
+                "inputs": [
+                    {
+                        "name": "InputFilesTable"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "OutputFilesTable"
+                    }
+                ],
+                "policy": {
+                    "timeout": "00:30:00",
+                    "concurrency": 1,
+                    "retry": 3
+                },
+                "name": "JSONTransformation",
+                "linkedServiceName": "HDInsightLinkedService"
+            }
+        ],
+        "start": "2015-04-21T00:00:00Z",
+        "end": "2015-04-24T00:00:00Z",
+        "isPaused": false
+   
+    }
+}
+
+
+
+
+
+
+
