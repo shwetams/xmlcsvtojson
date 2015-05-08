@@ -149,7 +149,7 @@ namespace adf.filetransformation
                             if (isFirstValueLine == true)
                             {
 
-                                jsonString = jsonString + "\"RowTimeStamp\":\"" + DateTime.Now.ToString() + "\",";
+                                jsonString = jsonString + "\"TriggerTimeStamp\":\"" + DateTime.Now.ToString() + "\",";
                                 jsonString = jsonString + metaDataString + ",";
                                 jsonString = jsonString + "\"" + column.ColumnName + "\":" + "\"" + rowValue.Trim() + "\"";
                                 isFirstValueLine = false;
@@ -165,7 +165,7 @@ namespace adf.filetransformation
                         {
                             if (isFirstValueLine == true)
                             {
-                                jsonString = jsonString + "\"RowTimeStamp\":\"" + DateTime.Now.ToString() + "\",";
+                                jsonString = jsonString + "\"TriggerTimeStamp\":\"" + DateTime.Now.ToString() + "\",";
                                 jsonString = jsonString + metaDataString + ",";
                                 jsonString = jsonString + "\"" + column.ColumnName + "\":" + "\""  +rowValue.Trim() + "\"";
                                 isFirstValueLine = false;
@@ -185,14 +185,14 @@ namespace adf.filetransformation
                         {
                             if (isFirstValueLine == true)
                             {
-                                jsonString = jsonString + "\"RowTimeStamp\":\"" + DateTime.Now.ToString() + "\",";
+                                jsonString = jsonString + "\"TriggerTimeStamp\":\"" + DateTime.Now.ToString() + "\",";
                                 jsonString = jsonString + metaDataString + ",";
-                                jsonString = jsonString + "\"" + "key" + i + "\":" + rowValue.Trim() + "\"";
+                                jsonString = jsonString + "\"" + "key" + i + "\":" + rowValue.Trim();
                                 isFirstValueLine = false;
                             }
                             else
                             {
-                                jsonString = jsonString + ",\"" + "key" + i + "\":" + "\"" + rowValue.Trim() + "\"";
+                                jsonString = jsonString + ",\"" + "key" + i + "\":" +  rowValue.Trim() ;
                                 isFirstValueLine = false;
                             }
 
@@ -201,7 +201,7 @@ namespace adf.filetransformation
                         {
                             if (isFirstValueLine == true)
                             {
-                                jsonString = jsonString + "\"RowTimeStamp\":\"" + DateTime.Now.ToString() + "\",";
+                                jsonString = jsonString + "\"TriggerTimeStamp\":\"" + DateTime.Now.ToString() + "\",";
                                 jsonString = jsonString + metaDataString + ",";
                                 jsonString = jsonString + "\"" + "key" + i + "\":" + "\"" + rowValue.Trim() + "\"";
                                 isFirstValueLine = false;

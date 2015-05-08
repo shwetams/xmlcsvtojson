@@ -45,7 +45,10 @@ namespace Com.StellmanGreene.CSVReader
     /// </summary>
     public class CSVReader : IDisposable
     {
-        public const string NEWLINE = "\r\n";
+        //
+        public const string NEWLINE = "\n";
+
+        //public const string NEWLINE = "\r\n";
 
         /// <summary>
         /// This reader will read all of the CSV data
@@ -114,19 +117,24 @@ namespace Com.StellmanGreene.CSVReader
             StringBuilder builder = new StringBuilder();
 
             // Read the next line
-            while ((reader.BaseStream.Position < reader.BaseStream.Length) && (!builder.ToString().EndsWith(NEWLINE)))
+            while ((reader.BaseStream.Position < reader.BaseStream.Length) && (!builder.ToString().EndsWith(NEWLINE) && !builder.ToString().EndsWith("\r")))
             {
                 char c = reader.ReadChar();
                 builder.Append(c);
             }
 
+           
+
             currentLine = builder.ToString();
             if (currentLine.EndsWith(NEWLINE))
                 currentLine = currentLine.Remove(currentLine.IndexOf(NEWLINE), NEWLINE.Length);
+            // Modifying to handle \r
+            if (currentLine.EndsWith("\r"))
+                currentLine = currentLine.Remove(currentLine.IndexOf("\r"), "\r".Length);
 
             // Build the list of objects in the line
             List<object> objects = new List<object>();
-            while (currentLine != "")
+            while (currentLine != "" && currentLine.Length > 0)
                 objects.Add(ReadNextObject());
             return objects;
         }
