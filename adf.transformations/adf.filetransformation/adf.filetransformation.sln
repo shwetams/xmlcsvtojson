@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "adf.filetransformation", "adf.filetransformation\adf.filetransformation.csproj", "{44FDD018-ED8A-422D-B58B-F8E24C332BC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{15C9EA0C-7BA8-4E12-8BD9-C1398EFCBA2D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{44FDD018-ED8A-422D-B58B-F8E24C332BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44FDD018-ED8A-422D-B58B-F8E24C332BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44FDD018-ED8A-422D-B58B-F8E24C332BC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15C9EA0C-7BA8-4E12-8BD9-C1398EFCBA2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15C9EA0C-7BA8-4E12-8BD9-C1398EFCBA2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15C9EA0C-7BA8-4E12-8BD9-C1398EFCBA2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15C9EA0C-7BA8-4E12-8BD9-C1398EFCBA2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

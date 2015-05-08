@@ -10,6 +10,7 @@ using System.IO;
 using Com.StellmanGreene.CSVReader;
 using System.Data;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace adf.filetransformation
 {
@@ -94,12 +95,22 @@ namespace adf.filetransformation
             settings.IgnoreComments = true;                         // Exclude comments
             MemoryStream memStream = new MemoryStream(Encoding.UTF8.GetBytes(xmlValue));
             StreamReader rd = new StreamReader(memStream);
-                        
+            string xml = rd.ReadToEnd();
+            xml = Regex.Replace(xml, @"<!\[CDATA\[>?", "");
+            xml = Regex.Replace(xml, @"\]+>+", "");
+            int xmlHeader = xml.IndexOf("<?xml version=");
+            if (xmlHeader <= 0)
+            {
+                string newxml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + xml;
+                xml = newxml;
+            }
+
             // Create reader based on settings
-            XmlReader reader = XmlReader.Create(rd, settings);
+            XmlReader reader = XmlReader.Create(new StringReader(xml), settings);
             // Will throw exception if document is invalid
             XmlDocument document = new XmlDocument();
-            document.Load(reader);
+            document.LoadXml(xml);
+            
             return document;
 
 
@@ -275,7 +286,7 @@ namespace adf.filetransformation
                 }
             }
 
-            if (node.ChildNodes.Count > 1 || (node.ChildNodes.Count == 1 && node.InnerText == null))
+            if (node.ChildNodes.Count > 1 || (node.ChildNodes.Count == 1 && (node.InnerText == null || node.InnerText == "")))
             {
 
                 XmlNodeList childNodes = node.ChildNodes;

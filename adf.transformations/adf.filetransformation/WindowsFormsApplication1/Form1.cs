@@ -23,10 +23,10 @@ namespace WindowsFormsApplication1
         {
             TransformToJSON xmlJson = new TransformToJSON();
             //GetJSONFromXML
-            //string xmltext = File.ReadAllText("C:\\Users\\shg\\PCBackup_29thAugust2014\\Work\\Beckman\\SampleDocuments\\AU680_Sample XML files\\XML files\\ParameterCDSetting.xml");
-            string csvText = File.ReadAllText(@"C:\Users\shg\PCBackup_29thAugust2014\Work\Beckman\SampleDocuments\AU680_Sample CSV files\PLCode.csv");
-            //xmlJson.ProcessXMLToJSON(xmltext, null);
-            xmlJson.ProcessCSVFile(csvText, false,null);
+            string xmltext = File.ReadAllText(@"C:\Users\shg\PCBackup_29thAugust2014\Work\Beckman\PoC\xmldata\100194_294975392_1430994622388.DATA");
+            //string csvText = File.ReadAllText(@"C:\Users\shg\PCBackup_29thAugust2014\Work\Beckman\SampleDocuments\AU680_Sample CSV files\PLCode.csv");
+            xmlJson.ProcessXMLToJSON(xmltext, null);
+            //xmlJson.ProcessCSVFile(csvText, false,null);
         }
     }
 }
