@@ -399,7 +399,7 @@ namespace adf.filetransformation
                 {
                     if (isNodeValueNumber)
                     {
-                        complexTagJsonString = complexTagJsonString + "\"value1\":" + "\"" + node.InnerText + "\"";
+                        complexTagJsonString = complexTagJsonString + "\"value1\":" + node.InnerText;
                     }
                     else
                     {
@@ -412,7 +412,7 @@ namespace adf.filetransformation
                 {
                     if (isNodeValueNumber)
                     {
-                        complexTagJsonString = complexTagJsonString + ",\"value1\":" + "\"" + node.InnerText + "\"";
+                        complexTagJsonString = complexTagJsonString + ",\"value1\":" + node.InnerText;
                     }
                     else
                     {
